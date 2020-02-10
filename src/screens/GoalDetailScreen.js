@@ -3,28 +3,18 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import FAB from "../components/FAB";
 import { connect } from "react-redux";
 
-//<Image style={styles.image} source={{ uri: goalToShow.imageUrl }} />
 const GoalDetailScreen = props => {
-  console.log("=================================================================================")
-  console.log(props)
-
 
   const id = props.navigation.getParam("goalId");
   const goalToShow = props.goals.find(goal => goal.key === id);
   return (
     <View style={styles.container}>
       
-      <Image
-        style={styles.image}
-        source={{
-          uri:
-            "https://cdn.pixabay.com/photo/2017/05/25/15/08/jogging-2343558_960_720.jpg"
-        }}
-      />
+      <Image style={styles.image} source={{ uri: goalToShow.link }} />
 
       <View style={styles.titleDateRow}>
         <Text style={styles.titleDate_title}>{goalToShow.title}</Text>
-        <Text style={styles.titleDate_date}>{goalToShow.title}</Text>
+        <Text style={styles.titleDate_date}>{goalToShow.link}</Text>
       </View>
 
       <FAB

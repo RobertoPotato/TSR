@@ -16,7 +16,8 @@ const GoalReducer = (state = initialState, action) => {
         ...state,
         goalList: state.goalList.concat({
           key: Math.random(),
-          title: action.payload
+          title: action.payload.title,
+          link: action.payload.link
         })
       };
 

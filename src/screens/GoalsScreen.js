@@ -6,12 +6,13 @@ import { connect } from "react-redux";
 import { removeGoal } from "../../data/action/Goal_p";
 
 const GoalsScreen = props => {
-  console.log(props);
+  //NOTE cons
+//  console.log(props.goals)
   const renderGridItem = itemData => {
     return (
       <GoalCard
         title={itemData.item.title}
-        image={itemData.item.image}
+        image={itemData.item.link}
         onSelect={() => {
           props.navigation.navigate({
             routeName: "GoalDetails",

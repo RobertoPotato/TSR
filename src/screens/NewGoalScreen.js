@@ -14,8 +14,16 @@ class NewGoalScreen extends Component {
     title: ""
   };
 
+  state2 = {
+    link: ""
+  };
+
   handleTitle = text => {
     this.setState({ title: text });
+  };
+
+  handleLink = textLink => {
+    this.setState({ link: textLink });
   };
 
   render() {
@@ -28,10 +36,18 @@ class NewGoalScreen extends Component {
           autoCapitalize="none"
           onChangeText={this.handleTitle}
         />
+        <Text>{this.state.link}</Text>
+        <TextInput
+          editable={true}
+          style={styles.textInput}
+          placeholder="Paste Link?"
+          autoCapitalize="none"
+          onChangeText={this.handleLink}
+        />
         <TouchableOpacity
           style={styles.btnSubmit}
           title="Submit"
-          onPress={() => this.props.add(this.state.title)}
+          onPress={() => this.props.add({ title: this.state.title, link: this.state.link })}
         >
           <Text style={styles.btnText}>SUBMIT</Text>
         </TouchableOpacity>
@@ -79,7 +95,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    add: (goal) => dispatch(addGoal(goal))
+    add: goal => dispatch(addGoal(goal))
   };
 };
 
