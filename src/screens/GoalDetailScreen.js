@@ -1,14 +1,27 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import FAB from "../components/FAB";
-import { dummyGoal } from "../../data/DummyData";
+import { connect } from "react-redux";
 
+//<Image style={styles.image} source={{ uri: goalToShow.imageUrl }} />
 const GoalDetailScreen = props => {
+  console.log("=================================================================================")
+  console.log(props)
+
+
   const id = props.navigation.getParam("goalId");
-  const goalToShow = dummyGoal.find(goal => goal.id === id);
+  const goalToShow = props.goals.find(goal => goal.key === id);
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: goalToShow.imageUrl }} />
+      
+      <Image
+        style={styles.image}
+        source={{
+          uri:
+            "https://cdn.pixabay.com/photo/2017/05/25/15/08/jogging-2343558_960_720.jpg"
+        }}
+      />
+
       <View style={styles.titleDateRow}>
         <Text style={styles.titleDate_title}>{goalToShow.title}</Text>
         <Text style={styles.titleDate_date}>{goalToShow.title}</Text>
@@ -35,11 +48,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   titleDate_title: {
     color: "white",
-    fontWeight: 'bold',
+    fontWeight: "bold",
     borderRadius: 5,
     backgroundColor: "grey",
     padding: 10,
@@ -47,10 +60,16 @@ const styles = StyleSheet.create({
   },
   titleDate_date: {
     color: "grey",
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 10,
     marginHorizontal: 10
   }
 });
 
-export default GoalDetailScreen;
+const mapStateToProps = state => {
+  return {
+    goals: state.GoalsReducer.goalList
+  };
+};
+
+export default connect(mapStateToProps)(GoalDetailScreen);
