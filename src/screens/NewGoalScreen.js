@@ -11,10 +11,7 @@ import { addGoal } from "../../data/action/Goal_p";
 
 class NewGoalScreen extends Component {
   state = {
-    title: ""
-  };
-
-  state2 = {
+    title: "",
     link: ""
   };
 
@@ -22,8 +19,8 @@ class NewGoalScreen extends Component {
     this.setState({ title: text });
   };
 
-  handleLink = textLink => {
-    this.setState({ link: textLink });
+  handleLink = text => {
+    this.setState({ link: text });
   };
 
   render() {
@@ -47,7 +44,9 @@ class NewGoalScreen extends Component {
         <TouchableOpacity
           style={styles.btnSubmit}
           title="Submit"
-          onPress={() => this.props.add({ title: this.state.title, link: this.state.link })}
+          onPress={() =>
+            this.props.add({ title: this.state.title, link: this.state.link })
+          }
         >
           <Text style={styles.btnText}>SUBMIT</Text>
         </TouchableOpacity>

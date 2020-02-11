@@ -22,7 +22,6 @@ const GoalReducer = (state = initialState, action) => {
       };
 
     case REMOVE_GOAL:
-      //logic
       return {
         ...state,
         goalList: state.goalList.filter(item => item.key !== payload)
