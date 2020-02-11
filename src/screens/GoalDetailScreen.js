@@ -4,23 +4,21 @@ import FAB from "../components/FAB";
 import { connect } from "react-redux";
 
 const GoalDetailScreen = props => {
-
   const id = props.navigation.getParam("goalId");
-  const goalToShow = props.goals.find(goal => goal.key === id);
+  const goalToShow = props.goals.find(goal => goal.id === id);
   return (
     <View style={styles.container}>
-      
-      <Image style={styles.image} source={{ uri: goalToShow.link }} />
+      <Image style={styles.image} source={{ uri: goalToShow.imageUrl }} />
 
       <View style={styles.titleDateRow}>
         <Text style={styles.titleDate_title}>{goalToShow.title}</Text>
-        <Text style={styles.titleDate_date}>{goalToShow.link}</Text>
+        <Text style={styles.titleDate_date}>{goalToShow.imageUrl}</Text>
       </View>
 
       <FAB
         style={styles.fab}
         imPressed={() => props.navigation.navigate("Home")}
-        iconName="ios-arrow-back"
+        iconName="md-create"
       />
     </View>
   );

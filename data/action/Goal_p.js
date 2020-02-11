@@ -1,14 +1,31 @@
-import { ADD_GOAL, REMOVE_GOAL, UPDATE_GOAL, SHARE_GOAL } from "./Goal_a";
+import {
+  ADD_GOAL,
+  REMOVE_GOAL,
+  UPDATE_GOAL,
+  SHARE_GOAL,
+  SET_GOALS
+} from "./Goal_a";
+import Goal from "../../models/Goals";
 
-/*
-export const addGoal = goal => ({
-  type: ADD_GOAL,
-  payload: goal
-});
-*/
+export const fetchGoals = () => {
+  return async dispatch => {
+    //any async code can be run here
+    const response = await fetch(
+      "https://rn-goally-app.firebaseio.com/goals.json"
+    );
 
-export const addGoal = goal => {
-  return async disptch => {
+    const resData = await response.json();
+    const loadedGoals = [];
+
+    for (const key in resData) {
+      loadedGoals.push(new Goal(key, resData[key].title, resData[key].link));
+    }
+    dispatch({ type: SET_GOALS, goals: loadedGoals });
+  };
+};
+
+export const addGoal = (title, link) => {
+  return async dispatch => {
     //any async code can be run here
     const response = await fetch(
       "https://rn-goally-app.firebaseio.com/goals.json",
@@ -18,16 +35,21 @@ export const addGoal = goal => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          goal
+          title,
+          link
         })
       }
     );
 
     const resData = await response.json();
 
-    disptch({
+    dispatch({
       type: ADD_GOAL,
-      payload: goal
+      payload: {
+        id: resData.name,
+        title,
+        link
+      }
     });
   };
 };

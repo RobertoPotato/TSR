@@ -45,7 +45,7 @@ class NewGoalScreen extends Component {
           style={styles.btnSubmit}
           title="Submit"
           onPress={() =>
-            this.props.add({ title: this.state.title, link: this.state.link })
+            this.props.add(this.state.title, this.state.link)
           }
         >
           <Text style={styles.btnText}>SUBMIT</Text>
@@ -94,7 +94,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    add: goal => dispatch(addGoal(goal))
+    add: (title, link) => dispatch(addGoal(title, link))
   };
 };
 

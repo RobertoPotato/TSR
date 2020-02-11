@@ -2,11 +2,14 @@ import {
   ADD_GOAL,
   REMOVE_GOAL,
   UPDATE_GOAL,
-  SHARE_GOAL
+  SHARE_GOAL,
+  SET_GOALS
 } from "../action/Goal_a";
+import Goal from "../../models/Goals";
+import { dummyGoal } from "../DummyData";
 
 const initialState = {
-  goalList: []
+  goalList: dummyGoal
 };
 
 const GoalReducer = (state = initialState, action) => {
@@ -14,11 +17,14 @@ const GoalReducer = (state = initialState, action) => {
     case ADD_GOAL:
       return {
         ...state,
-        goalList: state.goalList.concat({
-          key: Math.random(),
-          title: action.payload.title,
-          link: action.payload.link
-        })
+        goalList: state.goalList.concat(
+          new Goal(action.payload.id, action.payload.title, action.payload.link)
+        )
+      };
+
+    case SET_GOALS:
+      return {
+        goalList: action.goals
       };
 
     case REMOVE_GOAL:
