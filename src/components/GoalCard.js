@@ -12,7 +12,7 @@ const GoalCard = props => {
     <View style={styles.cardBody}>
       <TouchableOpacity onPress={props.onSelect}>
         <ImageBackground style={styles.bgImage} source={{ uri: props.image }}>
-          <Text style={styles.title}>{props.title}</Text>
+          <Text numberOfLines={2} style={styles.title}>{props.title}</Text>
         </ImageBackground>
       </TouchableOpacity>
     </View>
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
   title: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 15,
-    backgroundColor: "rgba(0,0,0,0.3)",
+    fontSize: 12,
+    backgroundColor: "rgba(0,0,0,0.4)",
     paddingVertical: 5,
     paddingHorizontal: 12,
     textAlign: "center"

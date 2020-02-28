@@ -10,7 +10,7 @@ const MainStackNav = createStackNavigator({
   Home: {
     screen: Goals,
     navigationOptions: {
-      headerTitle: "Goals"
+      headerTitle: "My Goals"
     }
   },
   GoalDetails: {

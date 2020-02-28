@@ -1,20 +1,23 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { addGoal } from "../../data/action/Goal_p";
+import TextInputItem from "../components/TextInputItem";
 
 class NewGoalScreen extends Component {
-  state = {
-    title: "",
-    link: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      link: "",
+      activeOrComplete: "active",
+      createdDate: new Date().getDate,
+      completedDate: "",
+      description: ""
+    };
+  }
 
+  //TODO create methods for the above inputs
   handleTitle = text => {
     this.setState({ title: text });
   };
@@ -23,29 +26,53 @@ class NewGoalScreen extends Component {
     this.setState({ link: text });
   };
 
+  handleDescription = text => {
+    this.setState({ description: text });
+  };
+
+  componentDidMount() {
+    var that = this;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    that.setState({
+      //Setting the value of the date time
+      date: date + "/" + month + "/" + year
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <Text>The date is: {this.state.date} </Text>
         <Text>{this.state.title}</Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder="What's your goal?"
-          autoCapitalize="none"
-          onChangeText={this.handleTitle}
+        <TextInputItem
+          placeholder="What's your new goal?"
+          handleInput={this.handleTitle}
         />
         <Text>{this.state.link}</Text>
-        <TextInput
-          editable={true}
-          style={styles.textInput}
+        <TextInputItem
           placeholder="Paste Link?"
-          autoCapitalize="none"
-          onChangeText={this.handleLink}
+          handleInput={this.handleLink}
+        />
+        <TextInputItem
+          placeholder="Describe your goal"
+          handleInput={this.handleDescription}
+          multiline={true}
+
         />
         <TouchableOpacity
           style={styles.btnSubmit}
           title="Submit"
           onPress={() =>
-            this.props.add(this.state.title, this.state.link)
+            this.props.add(
+              this.state.title,
+              this.state.link,
+              this.state.date,
+              this.state.activeOrComplete,
+              this.state.completedDate,
+              this.state.description
+            )
           }
         >
           <Text style={styles.btnText}>SUBMIT</Text>
@@ -54,6 +81,35 @@ class NewGoalScreen extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    goals: state.GoalsReducer.goalList
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    add: (
+      title,
+      link,
+      createdDate,
+      activeOrComplete,
+      completedDate,
+      description
+    ) =>
+      dispatch(
+        addGoal(
+          title,
+          link,
+          createdDate,
+          activeOrComplete,
+          completedDate,
+          description
+        )
+      )
+  };
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -85,17 +141,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   }
 });
-
-const mapStateToProps = state => {
-  return {
-    goals: state.GoalsReducer.goalList
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    add: (title, link) => dispatch(addGoal(title, link))
-  };
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewGoalScreen);

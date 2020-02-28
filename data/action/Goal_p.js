@@ -18,15 +18,32 @@ export const fetchGoals = () => {
     const loadedGoals = [];
 
     for (const key in resData) {
-      loadedGoals.push(new Goal(key, resData[key].title, resData[key].link));
+      //TODO Add methods to load all the new bits being fetched to the store
+      loadedGoals.push(
+        new Goal(
+          key,
+          resData[key].title,
+          resData[key].link,
+          resData[key].createdDate,
+          resData[key].activeOrComplete,
+          resData[key].completedDate,
+          resData[key].description
+        )
+      );
     }
     dispatch({ type: SET_GOALS, goals: loadedGoals });
   };
 };
 
-export const addGoal = (title, link) => {
+export const addGoal = (
+  title,
+  link,
+  createdDate,
+  activeOrComplete,
+  completedDate,
+  description
+) => {
   return async dispatch => {
-    //any async code can be run here
     const response = await fetch(
       "https://rn-goally-app.firebaseio.com/goals.json",
       {
@@ -36,7 +53,11 @@ export const addGoal = (title, link) => {
         },
         body: JSON.stringify({
           title,
-          link
+          link,
+          createdDate,
+          activeOrComplete,
+          completedDate,
+          description
         })
       }
     );
@@ -48,7 +69,11 @@ export const addGoal = (title, link) => {
       payload: {
         id: resData.name,
         title,
-        link
+        link,
+        createdDate,
+        activeOrComplete,
+        completedDate,
+        description
       }
     });
   };

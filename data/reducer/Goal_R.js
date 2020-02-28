@@ -18,7 +18,15 @@ const GoalReducer = (state = initialState, action) => {
       return {
         ...state,
         goalList: state.goalList.concat(
-          new Goal(action.payload.id, action.payload.title, action.payload.link)
+          new Goal(
+            action.payload.id,
+            action.payload.title,
+            action.payload.link,
+            action.payload.createdDate,
+            action.payload.activeOrComplete,
+            action.payload.completedDate,
+            action.payload.description
+          )
         )
       };
 

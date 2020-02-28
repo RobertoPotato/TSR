@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View,Text, StyleSheet, FlatList, ActivityIndicator } from "react-native";
+import { connect, useDispatch } from "react-redux";
+
 import FAB from "../components/FAB";
 import GoalCard from "../components/GoalCard";
-import { connect, useDispatch } from "react-redux";
 import { removeGoal } from "../../data/action/Goal_p";
 import * as goalActions from "../../data/action/Goal_p";
 
@@ -29,7 +30,13 @@ const GoalsScreen = props => {
           props.navigation.navigate({
             routeName: "GoalDetails",
             params: {
-              goalId: itemData.item.id
+              goalId: itemData.item.id,
+              activeOrComplete: itemData.item.activeOrComplete,
+              createdDate: itemData.item.createdDate,
+              completedDate: itemData.item.completedDate,
+              description: itemData.item.description,
+              link: itemData.item.link,
+              title: itemData.item.title
             }
           });
         }}
@@ -47,8 +54,12 @@ const GoalsScreen = props => {
 
   if (!isLoading && props.goals.length === 0) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>No Products Available</Text>
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <Text style={{ alignSelf: "center" }}>No Products Available</Text>
+        <FAB
+        imPressed={() => props.navigation.navigate("New")}
+        iconName="ios-add"
+      />
       </View>
     );
   }
