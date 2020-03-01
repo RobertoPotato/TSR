@@ -1,4 +1,4 @@
-export const LOG_DIVIDER = "====================================================="
+export const LOG_DIVIDER = "=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+"
 
 export const callConsole = (view, logItem) => {
     console.log(LOG_DIVIDER)

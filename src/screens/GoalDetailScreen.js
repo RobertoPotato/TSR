@@ -9,14 +9,14 @@ const GoalDetailScreen = props => {
   const id = props.navigation.getParam("goalId");
   const goalToShow = props.goals.find(goal => goal.id === id);
 
-  callConsole("GoalDetailScreen", goalToShow);
-
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: goalToShow.imageUrl }} />
 
       <View style={styles.titleDateRow}>
-        <Text style={styles.titleDate_title}>{goalToShow.title}</Text>
+        <Text style={styles.titleDate_title}>
+          {goalToShow.title} numberOfLines={2}
+        </Text>
         <Text style={styles.titleDate_date}>{goalToShow.createdDate}</Text>
       </View>
 
@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
     flex: 1
   },
   image: {
-    width: "100%",
-    height: 300
+    width: "95%",
+    height: 300,
+    marginHorizontal: 10
   },
   titleDateRow: {
     marginVertical: 10,

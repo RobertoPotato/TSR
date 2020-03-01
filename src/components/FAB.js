@@ -9,22 +9,14 @@ DO NOT contain in a scrollview
 */
 
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export default class FAB extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          onPress={this.props.imPressed}
-          style={styles.fab}
-        >
+        <TouchableOpacity onPress={this.props.imPressed} style={styles.fab}>
           <Ionicons name={this.props.iconName} size={40} color="white" />
         </TouchableOpacity>
       </View>

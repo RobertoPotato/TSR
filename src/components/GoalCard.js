@@ -7,12 +7,20 @@ import {
   TouchableOpacity
 } from "react-native";
 
+import StatusIndicator from "../components/StatusIndicator";
+import { callConsole } from "../components/Consoler";
+
 const GoalCard = props => {
   return (
     <View style={styles.cardBody}>
       <TouchableOpacity onPress={props.onSelect}>
         <ImageBackground style={styles.bgImage} source={{ uri: props.image }}>
-          <Text numberOfLines={2} style={styles.title}>{props.title}</Text>
+          <StatusIndicator
+            color={props.status === "active" ? "#77dd77" : "#ff6961"}
+          />
+          <Text numberOfLines={2} style={styles.title}>
+            {props.title}
+          </Text>
         </ImageBackground>
       </TouchableOpacity>
     </View>

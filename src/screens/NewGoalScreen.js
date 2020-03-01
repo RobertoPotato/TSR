@@ -42,6 +42,7 @@ class NewGoalScreen extends Component {
   }
 
   render() {
+    const titleMaxLength = 40
     return (
       <View style={styles.container}>
         <Text>The date is: {this.state.date} </Text>
@@ -49,6 +50,7 @@ class NewGoalScreen extends Component {
         <TextInputItem
           placeholder="What's your new goal?"
           handleInput={this.handleTitle}
+          maxLength={titleMaxLength}
         />
         <Text>{this.state.link}</Text>
         <TextInputItem

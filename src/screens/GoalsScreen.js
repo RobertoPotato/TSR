@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View,Text, StyleSheet, FlatList, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator
+} from "react-native";
 import { connect, useDispatch } from "react-redux";
 
 import FAB from "../components/FAB";
 import GoalCard from "../components/GoalCard";
 import { removeGoal } from "../../data/action/Goal_p";
 import * as goalActions from "../../data/action/Goal_p";
+
+import { callConsole } from "../components/Consoler";
 
 const GoalsScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +34,7 @@ const GoalsScreen = props => {
       <GoalCard
         title={itemData.item.title}
         image={itemData.item.imageUrl}
+        status={itemData.item.activeOrComplete}
         onSelect={() => {
           props.navigation.navigate({
             routeName: "GoalDetails",
@@ -57,9 +66,9 @@ const GoalsScreen = props => {
       <View style={{ flex: 1, justifyContent: "center" }}>
         <Text style={{ alignSelf: "center" }}>No Products Available</Text>
         <FAB
-        imPressed={() => props.navigation.navigate("New")}
-        iconName="ios-add"
-      />
+          imPressed={() => props.navigation.navigate("New")}
+          iconName="ios-add"
+        />
       </View>
     );
   }
