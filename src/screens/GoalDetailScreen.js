@@ -14,8 +14,8 @@ const GoalDetailScreen = props => {
       <Image style={styles.image} source={{ uri: goalToShow.imageUrl }} />
 
       <View style={styles.titleDateRow}>
-        <Text style={styles.titleDate_title}>
-          {goalToShow.title} numberOfLines={2}
+        <Text numberOfLines={2} style={styles.titleDate_title}>
+          {goalToShow.title}
         </Text>
         <Text style={styles.titleDate_date}>{goalToShow.createdDate}</Text>
       </View>
@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
   image: {
     width: "95%",
     height: 300,
-    marginHorizontal: 10
+    margin: 10,
+    borderRadius: 5
   },
   titleDateRow: {
     marginVertical: 10,
@@ -55,7 +56,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "grey",
     padding: 10,
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    maxWidth: "60%"
   },
   titleDate_date: {
     color: "grey",
